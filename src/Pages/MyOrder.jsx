@@ -1,6 +1,9 @@
+import { Layout } from "../Components/Layout"
 
 export const MyOrder = () => {
   return (
-    <div>MyOrder</div>
+    <Layout>
+      <div>MyOrder</div>
+    </Layout>
   )
 }
