@@ -23,7 +23,7 @@ export const ProductDetail = () => {
             <figure className="px-2">
                 <img 
                     className="w-full h-full rounded-lg"
-                    src={product.images[0]}
+                    src={product.images}
                     alt={product.title}
                 />
             </figure>
