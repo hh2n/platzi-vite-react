@@ -7,7 +7,79 @@ export const Navbar = () => {
 
     const context = useContext(ShoppingCardContext)
     const activeStyle = "underline underline-offset-4"
+
+    // Sign Out 
+    const signOut = localStorage.getItem('sign-out')
+    const parsedSignOut = JSON.parse(signOut)
+    const isUserSignOut = context.signOut || parsedSignOut
+
+    const handleSignOut = () => {
+        const stringifiedSignOut = JSON.stringify(true)
+        localStorage.setItem('sign-out', stringifiedSignOut)
+        context.setSignOut(true)
+    }
     
+    const renderView = () => {
+        if(isUserSignOut){
+            return (
+                <li>
+                    <NavLink
+                        to="/sign-in"
+                        className={({ isActive }) => isActive ? activeStyle: undefined}
+                        onClick={() => handleSignOut()}
+                    >
+                        Sign Out
+                    </NavLink>
+                </li>
+            )
+        }else{
+            return (
+                <>
+                    <li className="text-gray-400">
+                        correo_electronico@gmail.com
+                    </li>
+                    <li>
+                        <NavLink
+                            to='/my-orders'
+                            className={ ({ isActive }) =>
+                                isActive ? activeStyle : undefined
+                            }
+                        >
+                            My Orders
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink 
+                            to='/my-account'
+                            className={ ({ isActive }) =>
+                                isActive ? activeStyle : undefined
+                            }
+                        >
+                            My Account
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink 
+                            to='/sign-in'
+                            className={ ({ isActive }) =>
+                                isActive ? activeStyle : undefined
+                            }
+                            onClick={() => handleSignOut()}
+                        >
+                            Sign out
+                        </NavLink>
+                    </li>
+                    <li className="flex items-center">
+                    <ShoppingBagIcon className="h-5 w-5 text-gray-800" /> 
+                        <div>
+                            { context.cardProducts?.length }
+                        </div>
+                    </li>
+                </>
+            )
+        }
+    }
+
     return (
         <nav className="flex justify-between items-center fixed z-20 top-0 w-full py-5 px-8 text-sm font-light shadow-lg rounded-b-lg bg-white">
             <ul className="flex items-center gap-3">
@@ -86,45 +158,7 @@ export const Navbar = () => {
                 </li>
             </ul>
             <ul className="flex items-center gap-3">
-                <li className="text-gray-400">
-                    correo_electronico@gmail.com
-                </li>
-                <li>
-                    <NavLink
-                        to='/my-orders'
-                        className={ ({ isActive }) =>
-                            isActive ? activeStyle : undefined
-                        }
-                    >
-                        My Orders
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink 
-                        to='/my-account'
-                        className={ ({ isActive }) =>
-                            isActive ? activeStyle : undefined
-                        }
-                    >
-                        My Account
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink 
-                        to='/sign-in'
-                        className={ ({ isActive }) =>
-                            isActive ? activeStyle : undefined
-                        }
-                    >
-                        Sign In
-                    </NavLink>
-                </li>
-                <li className="flex items-center">
-                   <ShoppingBagIcon className="h-5 w-5 text-gray-800" /> 
-                    <div>
-                        { context.cardProducts?.length }
-                    </div>
-                </li>
+                {renderView()}
             </ul>
         </nav>
     )
