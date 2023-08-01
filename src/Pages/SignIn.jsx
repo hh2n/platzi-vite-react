@@ -126,7 +126,9 @@ export const SignIn = () => {
   return (
     <Layout>
       <h1 className="font-medium text-xl text-center mb-6 w-80">Welcome</h1>
-      {renderView()}
+      <div className="border rounded-lg p-10 my-5 shadow-lg">
+        {renderView()}
+      </div>
     </Layout>
   )
 }

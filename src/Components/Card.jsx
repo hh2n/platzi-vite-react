@@ -48,7 +48,7 @@ export const Card = ({ data }) => {
 
     return (
         <div 
-            className="bg-white cursor-pointer w-56 h-60"
+            className="bg-white cursor-pointer w-56 h-60 shadow-sm rounded-t-lg"
             onClick={ () => showProduct(data) }
         >
             <figure className="relative mb-2 w-full h-4/5">
@@ -64,7 +64,7 @@ export const Card = ({ data }) => {
                 />
                 {renderIcon(data.id)}
             </figure>
-            <p className="flex justify-between">
+            <p className="flex justify-between items-center h-auto pb-1 px-1">
                 <span className="text-sm font-light">{data.title}</span>
                 <span className="text-lg font-medium">${data.price}</span>
             </p>
